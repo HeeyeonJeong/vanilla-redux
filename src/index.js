@@ -6,15 +6,18 @@ const number = document.querySelector("p");
 
 number.innerHTML = 0;
 
+const ADD = "add";
+const MINUS = "minus";
+
 //reducer
 const countModifier = (count = 0, action) => {
-  console.log(count, action);
-  if (action.type === "add") {
-    return count + 1;
-  } else if (action.type === "minus") {
-    return count - 1;
-  } else {
-    return count;
+  switch (action.type) {
+    case ADD:
+      return count + 1;
+    case MINUS:
+      return count - 1;
+    default:
+      return count;
   }
 };
 
@@ -31,11 +34,11 @@ countStore.subscribe(onChange);
 
 //dispatch
 const handleAdd = () => {
-  countStore.dispatch({ type: "add" });
+  countStore.dispatch({ type: ADD });
 };
 
 const handleMinus = () => {
-  countStore.dispatch({ type: "minus" });
+  countStore.dispatch({ type: MINUS });
 };
 
 add.addEventListener("click", handleAdd);
