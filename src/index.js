@@ -1,12 +1,22 @@
 import { createStore } from "redux";
 
-const add = document.querySelector("#add");
-const minus = document.querySelector("#minus");
-const number = document.querySelector("p");
-
-const reducer = (count = 0) => {
-  return count;
+const countModifier = (count = 0, action) => {
+  if (action.type === "add") {
+    return count + 1;
+  } else if (action.type === "minus") {
+    return count - 1;
+  } else {
+    return count;
+  }
 };
 
-const countStore = createStore(reducer);
+const countStore = createStore(countModifier);
+
+countStore.dispatch({ type: "add" });
+countStore.dispatch({ type: "add" });
+countStore.dispatch({ type: "add" });
+countStore.dispatch({ type: "add" });
+countStore.dispatch({ type: "minus" });
+countStore.dispatch({ type: "minus" });
+
 console.log(countStore.getState());
